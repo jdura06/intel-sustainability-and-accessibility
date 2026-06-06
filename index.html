@@ -7,7 +7,24 @@
   <meta name="robots" content="index, follow" />
   <title>Intel: Sustainability Through the Ages</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link id="bootstrapStylesheet" rel="stylesheet" href="">
+  <script>
+    (function () {
+      const rtlLangs = ['ar', 'arc', 'ckb', 'dv', 'fa', 'he', 'iw', 'ku', 'ps', 'sd', 'ug', 'ur', 'yi'];
+      const htmlEl = document.documentElement;
+      const initialLang = htmlEl.lang || '';
+      const rtlCssUrl = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css';
+      const ltrCssUrl = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css';
+      const initialIsRtl = rtlLangs.includes(initialLang.trim().toLowerCase().split(/[-_]/)[0]);
+      htmlEl.dir = initialIsRtl ? 'rtl' : 'ltr';
+      htmlEl.classList.toggle('rtl', initialIsRtl);
+      const bootstrapLink = document.getElementById('bootstrapStylesheet');
+      if (bootstrapLink) {
+        bootstrapLink.href = initialIsRtl ? rtlCssUrl : ltrCssUrl;
+        bootstrapLink.crossOrigin = 'anonymous';
+      }
+    })();
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -243,7 +260,7 @@
      <!-- Note: There seems to be an issue with the carousel on inspect. Everytime the content changes, the page jumps up. Not sure why this is, but when resizing the actual
       page, the issue does not persist.-->
     <div class="container d-block d-md-none mobile-carousel">
-      <div id="mobileContentCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Mobile content carousel">
+      <div id="mobileContentCarousel" class="carousel slide" aria-label="Mobile content carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="p-3 text-center">
@@ -349,9 +366,10 @@
     (function () {
       const rtlLangs = ['ar', 'arc', 'ckb', 'dv', 'fa', 'he', 'iw', 'ku', 'ps', 'sd', 'ug', 'ur', 'yi'];
       const htmlEl = document.documentElement;
+      const bootstrapLink = document.getElementById('bootstrapStylesheet');
+      const ltrCssUrl = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css';
       const rtlCssUrl = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css';
       let currentLang = htmlEl.lang || '';
-      let rtlStyleLink = null;
 
       function isRtlLanguage(lang) {
         if (!lang) return false;
@@ -359,18 +377,9 @@
       }
 
       function ensureRtlStyles(enabled) {
-        if (enabled && !rtlStyleLink) {
-          rtlStyleLink = document.createElement('link');
-          rtlStyleLink.rel = 'stylesheet';
-          rtlStyleLink.href = rtlCssUrl;
-          rtlStyleLink.crossOrigin = 'anonymous';
-          document.head.appendChild(rtlStyleLink);
-        }
-
-        if (!enabled && rtlStyleLink) {
-          rtlStyleLink.remove();
-          rtlStyleLink = null;
-        }
+        if (!bootstrapLink) return;
+        bootstrapLink.href = enabled ? rtlCssUrl : ltrCssUrl;
+        bootstrapLink.crossOrigin = 'anonymous';
       }
 
       function updateDirection() {
@@ -380,7 +389,7 @@
 
         const rtlRequired = isRtlLanguage(newLang);
         htmlEl.dir = rtlRequired ? 'rtl' : 'ltr';
-        document.body.classList.toggle('rtl', rtlRequired);
+        htmlEl.classList.toggle('rtl', rtlRequired);
         ensureRtlStyles(rtlRequired);
       }
 
@@ -395,6 +404,23 @@
 
       observer.observe(htmlEl, { attributes: true });
       updateDirection();
+
+      function removeCarouselControlFocus() {
+        const controls = document.querySelectorAll(
+          '#mobileContentCarousel .carousel-control-prev, #mobileContentCarousel .carousel-control-next, #mobileContentCarousel .carousel-indicators button'
+        );
+
+        controls.forEach((control) => {
+          control.addEventListener('focus', () => control.blur());
+          control.addEventListener('pointerup', () => control.blur());
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', removeCarouselControlFocus);
+      } else {
+        removeCarouselControlFocus();
+      }
 
       // Fallback for Google Translate or other widgets that change page language indirectly.
       setInterval(updateDirection, 1000);
