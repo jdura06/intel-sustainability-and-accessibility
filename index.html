@@ -175,6 +175,168 @@
  
     </div><!-- /.timeline-track -->
   </section>
+
+  <!-- 3-Column Content Section: desktop grid + mobile carousel -->
+  <section class="content-columns">
+
+    <!-- Desktop: 3-column content (hidden on small screens) -->
+    <div class="container text-center d-none d-md-block">
+      <div class="row">
+        <div class="col">
+          <h2>
+            <span class="icon icon--black" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5c-3 0-5.7 1.6-7.2 4l1.7 1.1C7.6 8.7 9.6 7.5 12 7.5s4.4 1.2 5.5 2.6L19.2 9C17.7 6.6 15 5 12 5z"/>
+                <path d="M4.6 11c-0.1 0.2-0.1 0.5 0 0.7 2.2 4.1 6.3 7 11.4 7 1.1 0 2.1-0.1 3.1-0.4 0.3-0.1 0.4-0.5 0.2-0.8l-1.2-1.9c-0.1-0.2-0.4-0.3-0.6-0.2-2 0.7-4 1-6 1-3.1 0-6-1-8.1-2.6-0.3-0.2-0.7-0.2-0.8 0z"/>
+              </svg>
+            </span>
+            RISE Strategy
+          </h2>
+          <p>
+            Under its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy,
+            Intel sets ambitious 2030 goals, including driving industry-wide
+            progress on climate action, water stewardship, and waste reduction.
+          </p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="col">
+          <h2>
+            <span class="icon icon--black" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3v18M7 6l10 12" stroke="#000" stroke-width="0" fill="none"/>
+              </svg>
+            </span>
+            Commitment
+          </h2>
+          <p>
+            In 2022, Intel pledged to achieve net-zero greenhouse gas emissions
+            (Scope 1 and 2) by 2040. This commitment builds on decades of
+            environmental initiatives and partnerships across the semiconductor
+            industry.
+          </p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="col">
+          <h2>
+            <span class="icon icon--black" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2s-6 5.3-6 9.5A6 6 0 1 0 18 11.5C18 7.3 12 2 12 2z"/>
+              </svg>
+            </span>
+            Water &amp; Waste
+          </h2>
+          <p>
+            Intel conserves billions of gallons of water annually and
+            collaborates with local communities to restore watersheds.
+            Intel also upcycles and recycles materials to reduce waste and
+            advance a circular economy.
+          </p>
+          <a href="#">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile-only: carousel (visible only on small screens) -->
+     <!-- Note: There seems to be an issue with the carousel on inspect. Everytime the content changes, the page jumps up. Not sure why this is, but when resizing the actual
+      page, the issue does not persist.-->
+    <div class="container d-block d-md-none mobile-carousel">
+      <div id="mobileContentCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Mobile content carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="p-3 text-center">
+              <h2>
+                <span class="icon icon--black" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5c-3 0-5.7 1.6-7.2 4l1.7 1.1C7.6 8.7 9.6 7.5 12 7.5s4.4 1.2 5.5 2.6L19.2 9C17.7 6.6 15 5 12 5z"/>
+                    <path d="M4.6 11c-0.1 0.2-0.1 0.5 0 0.7 2.2 4.1 6.3 7 11.4 7 1.1 0 2.1-0.1 3.1-0.4 0.3-0.1 0.4-0.5 0.2-0.8l-1.2-1.9c-0.1-0.2-0.4-0.3-0.6-0.2-2 0.7-4 1-6 1-3.1 0-6-1-8.1-2.6-0.3-0.2-0.7-0.2-0.8 0z"/>
+                  </svg>
+                </span>
+                RISE Strategy
+              </h2>
+              <p>
+                Under its RISE (Responsible, Inclusive, Sustainable, Enabling) strategy,
+                Intel sets ambitious 2030 goals, including driving industry-wide
+                progress on climate action, water stewardship, and waste reduction.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="p-3 text-center">
+              <h2>
+                <span class="icon icon--black" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18M12 3v18M7 6l10 12" stroke="#000" stroke-width="0" fill="none"/>
+                  </svg>
+                </span>
+                Commitment
+              </h2>
+              <p>
+                In 2022, Intel pledged to achieve net-zero greenhouse gas emissions
+                (Scope 1 and 2) by 2040. This commitment builds on decades of
+                environmental initiatives and partnerships across the semiconductor
+                industry.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="p-3 text-center">
+              <h2>
+                <span class="icon icon--black" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2s-6 5.3-6 9.5A6 6 0 1 0 18 11.5C18 7.3 12 2 12 2z"/>
+                  </svg>
+                </span>
+                Water &amp; Waste
+              </h2>
+              <p>
+                Intel conserves billions of gallons of water annually and
+                collaborates with local communities to restore watersheds.
+                Intel also upcycles and recycles materials to reduce waste and
+                advance a circular economy.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#mobileContentCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#mobileContentCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#mobileContentCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#mobileContentCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mobileContentCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Subscription Form -->
+  <section class="subscribe">
+    <div class="container">
+      <div class="row justify-content-center">
+        <p class="text-center mb-4">Subscribe to our newsletter below.</p>
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+          <form class="d-flex gap-2" aria-label="Subscribe form">
+            <label for="subscribeEmail" class="visually-hidden">Email address</label>
+            <input type="email" class="form-control" id="subscribeEmail" placeholder="Enter your email" aria-label="Email" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
  
 </body>
 </html>

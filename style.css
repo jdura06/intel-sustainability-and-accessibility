@@ -84,12 +84,19 @@ body {
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  justify-content: flex-start;
   gap: 1rem;
   overflow-x: auto;
   padding-bottom: 1rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: #0046C8 transparent;
+}
+
+@media (min-width: 2200px) {
+  .timeline-track {
+    justify-content: center;
+  }
 }
  
 .timeline-track::-webkit-scrollbar { height: 5px; }
@@ -137,6 +144,7 @@ body {
 .card-inner {
   position: relative;
   flex: 1;
+  min-height: 220px;
   overflow: hidden;
 }
  
@@ -145,7 +153,7 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 180px;
+  min-height: 220px;
   object-fit: cover;
   /* grey placeholder colour while src is missing/loading */
   background-color: #cdd8ef;
@@ -164,6 +172,7 @@ body {
   background: rgba(0, 20, 70, 0.82);
   opacity: 0;
   transition: opacity 0.35s ease;
+  overflow-y: auto;
 }
  
 .card-overlay h3 {
@@ -198,6 +207,67 @@ body {
 .card--green { border-top-color: #1a7a3c; }
 .card--green .card-year { background-color: #1a7a3c; }
 .card--green .card-overlay { background: rgba(5, 40, 18, 0.84); }
+
+/* Ensure "Learn More" links and mobile carousel text do not get truncated */
+.content-columns a {
+  display: inline-block;
+  white-space: normal;
+}
+
+.mobile-carousel .carousel-item p {
+  white-space: normal;
+}
+
+/* Icons next to section headers */
+.content-columns h2,
+.mobile-carousel h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-block;
+  flex: 0 0 1.2em;
+}
+.icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: #000;
+}
+.icon--white svg { color: #fff; }
+.icon--black svg { color: #000; }
+
+
+
+
+/* ─────────────────────────────────────────
+   subscription section
+───────────────────────────────────────── */
+
+.subscribe {
+  background-color: #0046C8;
+  color: #ffffff;
+  text-align: center;
+  padding: 5rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.text-center {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
  
 /* ─────────────────────────────────────────
    Mobile — vertical stack
@@ -226,4 +296,93 @@ body {
   /* On touch devices show overlay always (no hover) */
   .card-overlay { opacity: .9;}
   .card-img { opacity: 0.85; }
+
+  /* 3rd column slide show on mobile */
+  
+}
+
+/* Mobile carousel controls — simple black arrows without circle */
+@media (max-width: 767px) {
+  .mobile-carousel .carousel-control-prev,
+  .mobile-carousel .carousel-control-next {
+    background: transparent;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    padding: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+    z-index: 5;
+    border: none;
+  }
+
+  .mobile-carousel .carousel-control-prev { left: 0.25rem; }
+  .mobile-carousel .carousel-control-next { right: 0.25rem; }
+
+  .mobile-carousel .carousel-control-prev-icon,
+  .mobile-carousel .carousel-control-next-icon {
+    background-image: none; /* hide default icon */
+    display: block;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .mobile-carousel .carousel-control-prev::before,
+  .mobile-carousel .carousel-control-next::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .mobile-carousel .carousel-control-prev::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 14' fill='none'><path d='M7 1L1 7l6 6' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  }
+
+  .mobile-carousel .carousel-control-next::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 14' fill='none'><path d='M1 1l6 6-6 6' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  }
+
+  /* Give small horizontal padding so arrows don't overlap text and
+     remove any accidental white backgrounds that create a bar */
+  .mobile-carousel {
+    background: transparent;
+  }
+
+  .mobile-carousel .carousel-inner {
+    padding: 0 1rem;
+    overflow: visible;
+    background: transparent;
+  }
+
+  .mobile-carousel .carousel-item {
+    background: transparent;
+  }
+
+  .mobile-carousel .p-3,
+  .mobile-carousel .carousel-item > div {
+    background: transparent;
+  }
+
+  /* indicators: keep them visually lower but inside the carousel to avoid
+     the browser auto-scrolling when they receive focus */
+  .mobile-carousel {
+    padding-bottom: 2rem; /* make room for indicators */
+  }
+  .mobile-carousel .carousel-indicators {
+    bottom: 0;
+    transform: translateY(0.9rem);
+    gap: 0.25rem;
+    z-index: 6;
+  }
+  .mobile-carousel .carousel-indicators button {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.25);
+    border: none;
+  }
 }
