@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore Intel's sustainability journey, milestones, and climate commitments from 1968 to the present." />
+  <meta name="robots" content="index, follow" />
   <title>Intel: Sustainability Through the Ages</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -338,5 +340,60 @@
     </div>
   </section>
  
+  <script>
+    (function () {
+      const rtlLangs = ['ar', 'arc', 'ckb', 'dv', 'fa', 'he', 'iw', 'ku', 'ps', 'sd', 'ug', 'ur', 'yi'];
+      const htmlEl = document.documentElement;
+      const rtlCssUrl = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css';
+      let currentLang = htmlEl.lang || '';
+      let rtlStyleLink = null;
+
+      function isRtlLanguage(lang) {
+        if (!lang) return false;
+        return rtlLangs.includes(lang.trim().toLowerCase().split(/[-_]/)[0]);
+      }
+
+      function ensureRtlStyles(enabled) {
+        if (enabled && !rtlStyleLink) {
+          rtlStyleLink = document.createElement('link');
+          rtlStyleLink.rel = 'stylesheet';
+          rtlStyleLink.href = rtlCssUrl;
+          rtlStyleLink.crossOrigin = 'anonymous';
+          document.head.appendChild(rtlStyleLink);
+        }
+
+        if (!enabled && rtlStyleLink) {
+          rtlStyleLink.remove();
+          rtlStyleLink = null;
+        }
+      }
+
+      function updateDirection() {
+        const newLang = htmlEl.lang || '';
+        if (newLang === currentLang) return;
+        currentLang = newLang;
+
+        const rtlRequired = isRtlLanguage(newLang);
+        htmlEl.dir = rtlRequired ? 'rtl' : 'ltr';
+        document.body.classList.toggle('rtl', rtlRequired);
+        ensureRtlStyles(rtlRequired);
+      }
+
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+            updateDirection();
+            break;
+          }
+        }
+      });
+
+      observer.observe(htmlEl, { attributes: true });
+      updateDirection();
+
+      // Fallback for Google Translate or other widgets that change page language indirectly.
+      setInterval(updateDirection, 1000);
+    })();
+  </script>
 </body>
 </html>
